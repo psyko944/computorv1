@@ -1,4 +1,5 @@
 from pdb import main
+from utils import *
 import parser
 import sys
 
@@ -16,6 +17,6 @@ if __name__ == "__main__":
 		raise ValueError("Error: One argument is required.")
 	equation = sys.argv[1]
 	print("equation: ", equation)
-	# print("Reduced form: ", equation.split())
 	parser.parse(equation)
+	# print("Reduced form: ", equation.split())
 	# print("Polynomial degree: ", find_degree(equation.split()))
