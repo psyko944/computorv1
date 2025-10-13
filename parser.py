@@ -22,7 +22,19 @@ def print_monomial(m):
 	print(f"sign: '{s}', number: '{n}', fractional part: '{f}', exponent: '{e}', variable: '{var}'")
 	return Monomial(-n if s == '-' else n, int(e))
 
-# def format_polynomial(lhs, rhs):
+def format_polynomial(lhs, rhs):
+	print(max(x[1] for x in (lhs + rhs)))
+	formated = [0] * (max(x[1] for x in (lhs + rhs)) + 1)
+	for m in lhs:
+		formated[m[1]] += m[0]
+	for m in rhs:
+		formated[m[1]] -= m[0]
+	print("formated", formated)
+	a = f"{formated[2]} * X^2" if formated[2] else ""
+	b = f"{formated[1]} * X^1" if formated[1] else ""
+	c = f"{formated[0]} * X^0" if formated[0] else ""
+	reduced = " ".join(x for x in [c, b, a] if x)
+	# print(f"Reduced form: {formated[2]} * X^2 = 0")
 
 def parse_polynomial(equation):
 	if re.fullmatch(polynomial, equation):
@@ -53,8 +65,9 @@ def parse(equation):
 		monomials_left.append(print_monomial(m))
 	for m in rhs:
 		monomials_right.append(print_monomial(m))
-	print("monomials RHS:")
+	print("monomials")
 	for term in monomials_left:
-		print(term, term.coefficient)
+		print(term)
 	for term in monomials_right:
 		print(term)
+	format_polynomial(monomials_left, monomials_right)
