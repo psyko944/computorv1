@@ -9,7 +9,7 @@ if __name__ == "__main__":
 		print(f"Usage: python {sys.argv[0]} \"<your_equation>\"")
 		raise ValueError("Error: One argument is required.")
 	equation = sys.argv[1]
-	print("equation: ", equation)
+	# print("equation: ", equation)
 	reduced, max_degree = parser.parse(equation)
 	print("Polynomial degree:", max_degree)
 	solver.print_solution(reduced, max_degree)

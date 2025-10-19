@@ -71,8 +71,8 @@ def parse(equation):
 		raise ValueError("Error: Both sides of the equation must be non-empty.")
 	# print("LHS terms before:", lhs)
 	lhs, rhs = parse_polynomial(lhs), parse_polynomial(rhs)
-	print("LHS terms:", lhs)
-	print("RHS terms:", rhs)
+	# print("LHS terms:", lhs)
+	# print("RHS terms:", rhs)
 	# print("monomials regex LHS:")
 	monomials_left = []
 	monomials_right = []
