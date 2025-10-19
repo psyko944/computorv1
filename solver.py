@@ -3,7 +3,7 @@ import utils
 
 def print_solution(reduced, max_degree):
     if max_degree == 0:
-        print("There are no solutions.")
+        print("No solution.")
     elif max_degree == 1:
         solve_first_degree(reduced)
     elif max_degree == 2:
@@ -12,7 +12,7 @@ def print_solution(reduced, max_degree):
         print("The polynomial degree is strictly greater than 2, I can't solve.")
 
 def solve_first_degree(reduced):
-    print(f"The solution is\n{ -reduced[0] / reduced[1] }", -reduced[0], reduced[1])
+    print(f"The solution is\n{ -reduced[0] / reduced[1] }")
 
 def cal_roots(a, b, c):
   if a == 0:
@@ -24,10 +24,10 @@ def cal_roots(a, b, c):
     print("one root")
     return [-b/(2*a)]
   elif d > 0:
-    print("Two real roots")
+    print("Discriminant is strictly positive, the two solutions are:")
     return [(-b-utils.get_sqrt(d))/(2 * a), (-b+utils.get_sqrt(d))/(2 * a)]
   else:
-    print("Two imaginary roots")
+    print("Discriminant is strictly negative, the two complex solutions are:")
     return [(-b-utils.sqrt(d))/(2 * a), (-b+utils.sqrt(d))/(2 * a)]
 
 def solve(a1, b1, c1, a2, b2, c2):

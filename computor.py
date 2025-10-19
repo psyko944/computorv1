@@ -11,6 +11,5 @@ if __name__ == "__main__":
 	equation = sys.argv[1]
 	print("equation: ", equation)
 	reduced, max_degree = parser.parse(equation)
-	# print(f"Reduced form: {reduced}")
 	print("Polynomial degree:", max_degree)
 	solver.print_solution(reduced, max_degree)

@@ -30,22 +30,19 @@ def format_polynomial(lhs, rhs):
 		formated[m[1]] += m[0]
 	for m in rhs:
 		formated[m[1]] -= m[0]
+	while len(formated) > 1 and formated[-1] == 0:
+		formated.pop()
+	max_degree = len(formated) - 1
 	# print("formated", formated)
 	terms = []
 	for degree in range(len(formated)):
 		coeff = formated[degree]
 		if coeff == 0:
 			continue
-		# if degree == 0:
-		# 	term = f"{abs(coeff)} * X^0"
-		# elif degree == 1:
-		# 	term = f"{abs(coeff)} * X^1"
-		# else:
-		# 	term = f"{abs(coeff)} * X^2"	
-		term = f"{abs(coeff)} * X^{term}" 
+		term = f"{abs(coeff)} * X^{degree}" 
 		sign = ''
 		if coeff < 0:
-			sign = "- " if not terms else " - " 
+			sign = "-" if not terms else " - " 
 		elif terms:
 			sign = " + "
 		term = sign + term
@@ -74,8 +71,8 @@ def parse(equation):
 		raise ValueError("Error: Both sides of the equation must be non-empty.")
 	# print("LHS terms before:", lhs)
 	lhs, rhs = parse_polynomial(lhs), parse_polynomial(rhs)
-	# print("LHS terms:", lhs)
-	# print("RHS terms:", rhs)
+	print("LHS terms:", lhs)
+	print("RHS terms:", rhs)
 	# print("monomials regex LHS:")
 	monomials_left = []
 	monomials_right = []
@@ -85,10 +82,10 @@ def parse(equation):
 	for m in rhs:
 		monomials_right.append(print_monomial(m))
 	# print("monomials LHS:")
-	for term in monomials_left:
-		print(term)
+	# for term in monomials_left:
+	# 	print(term)
 	# print("monomials RHS:")
-	for term in monomials_right:
-		print(term)
+	# for term in monomials_right:
+	# 	print(term)
 	reduced, max_degree = format_polynomial(monomials_left, monomials_right)
 	return reduced, max_degree
