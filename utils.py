@@ -63,3 +63,6 @@ def sqrt(n: int) -> cpx:
 
 def get_discriminant(a, b, c):
 	return b*b - 4*a*c
+
+def get_max_degree(lhs, rhs):
+   return max(x.exponent for x in (lhs + rhs))

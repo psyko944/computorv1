@@ -1,10 +1,11 @@
 import re
 from collections import namedtuple
+from utils import get_max_degree
 
 charset = "0123456789+-*=/^xX."
 sign = r"([+-]?)"
 number = r"(\d+(\.\d+)?)"
-exponent = r"[xX](\^[0-2])?"
+exponent = r"[xX](\^\d+)?"
 monomial = rf"{sign}(?:{number}\*{exponent}|{number}|{exponent})"
 polynomial = rf"({monomial})+"
 
@@ -19,31 +20,48 @@ def print_monomial(m):
 	f = m[2] if m[2] else m[5] if m[5] else ''
 	n = m[4] if m[4] else m[1] if m[1] else '1'
 	n = float(n) if f else int(n)
-	print(f"sign: '{s}', number: '{n}', fractional part: '{f}', exponent: '{e}', variable: '{var}'")
+	# print(f"sign: '{s}', number: '{n}', fractional part: '{f}', exponent: '{e}', variable: '{var}'")
 	return Monomial(-n if s == '-' else n, int(e))
 
 def format_polynomial(lhs, rhs):
-	print(max(x[1] for x in (lhs + rhs)))
-	formated = [0] * (max(x[1] for x in (lhs + rhs)) + 1)
+	max_degree = get_max_degree(lhs, rhs)
+	formated = [0] * (max_degree + 1)
 	for m in lhs:
 		formated[m[1]] += m[0]
 	for m in rhs:
 		formated[m[1]] -= m[0]
-	print("formated", formated)
-	a = f"{formated[2]} * X^2" if formated[2] else ""
-	b = f"{formated[1]} * X^1" if formated[1] else ""
-	c = f"{formated[0]} * X^0" if formated[0] else ""
-	reduced = " ".join(x for x in [c, b, a] if x)
-	# print(f"Reduced form: {formated[2]} * X^2 = 0")
+	# print("formated", formated)
+	terms = []
+	for degree in range(len(formated)):
+		coeff = formated[degree]
+		if coeff == 0:
+			continue
+		# if degree == 0:
+		# 	term = f"{abs(coeff)} * X^0"
+		# elif degree == 1:
+		# 	term = f"{abs(coeff)} * X^1"
+		# else:
+		# 	term = f"{abs(coeff)} * X^2"	
+		term = f"{abs(coeff)} * X^{term}" 
+		sign = ''
+		if coeff < 0:
+			sign = "- " if not terms else " - " 
+		elif terms:
+			sign = " + "
+		term = sign + term
+		terms.append(term)
+	reduced = "".join(terms) + " = 0" if terms else "0 = 0"
+	print(f"Reduced form: {reduced}")
+	return formated, max_degree
 
 def parse_polynomial(equation):
-	if re.fullmatch(polynomial, equation):
-		print("match")
+	if not re.fullmatch(polynomial, equation):
+		print("Invalid polynomial format.")
 	p = re.findall(monomial, equation)
 	return p
 
 
-#create a function which store all value by same degree then reduice
+#create a function which store all value by same degree then reduce
 def parse(equation):
 	s = equation.replace(" ", "")
 	for x in s:
@@ -54,20 +72,23 @@ def parse(equation):
 	lhs, rhs = s.split('=')
 	if not lhs or not rhs:
 		raise ValueError("Error: Both sides of the equation must be non-empty.")
-	print("LHS terms before:", lhs)
+	# print("LHS terms before:", lhs)
 	lhs, rhs = parse_polynomial(lhs), parse_polynomial(rhs)
-	print("LHS terms:", lhs)
-	print("RHS terms:", rhs)
-	print("monomials LHS:")
+	# print("LHS terms:", lhs)
+	# print("RHS terms:", rhs)
+	# print("monomials regex LHS:")
 	monomials_left = []
 	monomials_right = []
 	for m in lhs:
 		monomials_left.append(print_monomial(m))
+	# print("monomials regex RHS:")
 	for m in rhs:
 		monomials_right.append(print_monomial(m))
-	print("monomials")
+	# print("monomials LHS:")
 	for term in monomials_left:
 		print(term)
+	# print("monomials RHS:")
 	for term in monomials_right:
 		print(term)
-	format_polynomial(monomials_left, monomials_right)
+	reduced, max_degree = format_polynomial(monomials_left, monomials_right)
+	return reduced, max_degree

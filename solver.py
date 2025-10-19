@@ -1,6 +1,18 @@
 from utils import get_discriminant
 import utils
 
+def print_solution(reduced, max_degree):
+    if max_degree == 0:
+        print("There are no solutions.")
+    elif max_degree == 1:
+        solve_first_degree(reduced)
+    elif max_degree == 2:
+        cal_roots(reduced[2], reduced[1], reduced[0])
+    else: 
+        print("The polynomial degree is strictly greater than 2, I can't solve.")
+
+def solve_first_degree(reduced):
+    print(f"The solution is\n{ -reduced[0] / reduced[1] }", -reduced[0], reduced[1])
 
 def cal_roots(a, b, c):
   if a == 0:
