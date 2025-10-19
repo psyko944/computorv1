@@ -41,4 +41,14 @@ First Degree Equation (Linear): bX+c=0 (where a=0 and b !=0)
 
 ⚙️ Usage
 ---
-python3 computor.py "EQUATION"
+python3 computor.py "EQUATION"\
+<br>
+example:\
+python computor.py "5 * X^0 + 4 * X^1- 9.3 * X^2 = 1 * X^0"
+<br>
+Reduced form: 4 * X^0 + 4 * X^1 - 9.3 * X^2 = 0\
+Polynomial degree: 2\
+Discriminant is strictly positive, the two solutions are:
+<br>
+0.905239\
+-0.475131
