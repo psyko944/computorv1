@@ -30,10 +30,9 @@ def format_polynomial(lhs, rhs):
 		formated[m[1]] += m[0]
 	for m in rhs:
 		formated[m[1]] -= m[0]
-	while len(formated) > 1 and formated[-1] == 0:
+	while formated and formated[-1] == 0:
 		formated.pop()
 	max_degree = len(formated) - 1
-	# print("formated", formated)
 	terms = []
 	for degree in range(len(formated)):
 		coeff = formated[degree]
