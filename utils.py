@@ -72,12 +72,6 @@ def get_max_degree(lhs, rhs):
 def fmt_num(n):
    return f"{float(n):.6f}".rstrip('0').rstrip('.')
 
-def fmt_cpx(z):
-    re = fmt_num(z.real)
-    im = fmt_num(abs(z.imag))
-    sign = '+' if z.imag >= 0 else '-'
-    return f"{re}{sign}{im}i"
-
 def fmt_solution(equation):
     LIMIT_DENOMINATOR = 1000
     TOLERANCE = 1e-9
@@ -91,3 +85,14 @@ def fmt_solution(equation):
         if f.denominator == 1:
             return str(f.numerator)
         return f"{f.numerator}/{f.denominator}"
+    else:
+        re = equation.real
+        im = equation.imag
+        re_str = fmt_solution(re) if re != 0 else ''
+        im_str = fmt_solution(abs(im))
+        im_fraction = im_str.split('/')
+        im_str = im_str+'i' if len(im_fraction) == 1 else f"{im_fraction[0]}/i{im_fraction[1]}"
+        sign = '+' if im <= 0 else '-'
+        if not re_str:
+            return f"{'-' if im > 0 else ''}{im_str}"
+        return f"{re_str} {sign} {im_str}"

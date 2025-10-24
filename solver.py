@@ -33,8 +33,8 @@ def cal_roots(a, b, c):
     return [(-b-utils.get_sqrt(d))/(2 * a), (-b+utils.get_sqrt(d))/(2 * a)]
   else:
     print("Discriminant is strictly negative, the two complex solutions are:")
-    print(f"{utils.fmt_cpx((-b-utils.sqrt(d))/(2 * a))}")
-    print(f"{utils.fmt_cpx((-b+utils.sqrt(d))/(2 * a))}")
+    print(f"{utils.fmt_solution((-b-utils.sqrt(d))/(2 * a))}")
+    print(f"{utils.fmt_solution((-b+utils.sqrt(d))/(2 * a))}")
     return [(-b-utils.sqrt(d))/(2 * a), (-b+utils.sqrt(d))/(2 * a)]
 
 def solve(a1, b1, c1, a2, b2, c2):
