@@ -1,3 +1,5 @@
+from fractions import Fraction
+
 class cpx:
   real = 0
   imag = 0
@@ -66,3 +68,26 @@ def get_discriminant(a, b, c):
 
 def get_max_degree(lhs, rhs):
    return max(x.exponent for x in (lhs + rhs))
+
+def fmt_num(n):
+   return f"{float(n):.6f}".rstrip('0').rstrip('.')
+
+def fmt_cpx(z):
+    re = fmt_num(z.real)
+    im = fmt_num(abs(z.imag))
+    sign = '+' if z.imag >= 0 else '-'
+    return f"{re}{sign}{im}i"
+
+def fmt_solution(equation):
+    LIMIT_DENOMINATOR = 1000
+    TOLERANCE = 1e-9
+    if not isinstance(equation, cpx):
+        try:
+           f = Fraction(equation).limit_denominator(LIMIT_DENOMINATOR)
+           if abs(equation - float(f)) > TOLERANCE:
+                return fmt_num(equation)
+        except OverflowError:
+            return fmt_num(equation)
+        if f.denominator == 1:
+            return str(f.numerator)
+        return f"{f.numerator}/{f.denominator}"

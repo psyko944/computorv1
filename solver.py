@@ -1,4 +1,5 @@
 from utils import get_discriminant
+from fractions import Fraction
 import utils
 
 def print_solution(reduced, max_degree):
@@ -14,7 +15,7 @@ def print_solution(reduced, max_degree):
         print("The polynomial degree is strictly greater than 2, I can't solve.")
 
 def solve_first_degree(reduced):
-    print(f"The solution is\n{ -reduced[0] / reduced[1] }")
+    print(f"The solution is:\n{ utils.fmt_solution(-reduced[0] / reduced[1]) }")
 
 def cal_roots(a, b, c):
   if a == 0:
@@ -27,15 +28,13 @@ def cal_roots(a, b, c):
     return [-b/(2*a)]
   elif d > 0:
     print("Discriminant is strictly positive, the two solutions are:")
-    print(f"{(-b-utils.get_sqrt(d))/(2 * a):.6f}")
-    print(f"{(-b+utils.get_sqrt(d))/(2 * a):.6f}")
+    print(f"{utils.fmt_solution((-b-utils.get_sqrt(d))/(2 * a))}")
+    print(f"{utils.fmt_solution((-b+utils.get_sqrt(d))/(2 * a))}")
     return [(-b-utils.get_sqrt(d))/(2 * a), (-b+utils.get_sqrt(d))/(2 * a)]
   else:
     print("Discriminant is strictly negative, the two complex solutions are:")
-    # print(f"{(-b+utils.sqrt(d))/(2 * a):.6f}")
-    # print(f"{(-b-utils.sqrt(d))/(2 * a):.6f}")
-    print(f"{(-b+utils.sqrt(d))/(2 * a)}")
-    print(f"{(-b-utils.sqrt(d))/(2 * a)}")
+    print(f"{utils.fmt_cpx((-b-utils.sqrt(d))/(2 * a))}")
+    print(f"{utils.fmt_cpx((-b+utils.sqrt(d))/(2 * a))}")
     return [(-b-utils.sqrt(d))/(2 * a), (-b+utils.sqrt(d))/(2 * a)]
 
 def solve(a1, b1, c1, a2, b2, c2):
