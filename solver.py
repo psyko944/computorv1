@@ -24,7 +24,8 @@ def cal_roots(a, b, c):
     return [c/b]
   d = get_discriminant(a, b, c)
   if d == 0:
-    print("one root")
+    print("Discriminant is zero, the unique solution is:")
+    print(f"{utils.fmt_solution(-b/(2*a))}")
     return [-b/(2*a)]
   elif d > 0:
     print("Discriminant is strictly positive, the two solutions are:")

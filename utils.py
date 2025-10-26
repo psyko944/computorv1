@@ -91,7 +91,7 @@ def fmt_solution(equation):
         re_str = fmt_solution(re) if re != 0 else ''
         im_str = fmt_solution(abs(im))
         im_fraction = im_str.split('/')
-        im_str = im_str+'i' if len(im_fraction) == 1 else f"{im_fraction[0]}/i{im_fraction[1]}"
+        im_str = im_str+'i' if len(im_fraction) == 1 else f"{im_fraction[0]}i/{im_fraction[1]}"
         sign = '+' if im <= 0 else '-'
         if not re_str:
             return f"{'-' if im > 0 else ''}{im_str}"

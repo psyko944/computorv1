@@ -21,7 +21,7 @@ def print_monomial(m):
 	n = m[4] if m[4] else m[1] if m[1] else '1'
 	n = float(n) if f else int(n)
 	explicit_exponent = m[3] or m[6]
-	print(f"sign: '{s}', number: '{n}', fractional part: '{f}', exponent: '{e}', variable: '{var}'")
+	# print(f"sign: '{s}', number: '{n}', fractional part: '{f}', exponent: '{e}', variable: '{var}'")
 	return Monomial(-n if s == '-' else n, int(e), explicit_exponent)
 
 def format_polynomial(lhs, rhs):
@@ -85,7 +85,7 @@ def parse(equation):
 		raise ValueError("Error: Both sides of the equation must be non-empty.")
 	# print("LHS terms before:", lhs)
 	lhs, rhs = parse_polynomial(lhs), parse_polynomial(rhs)
-	print("LHS terms:", lhs)
+	# print("LHS terms:", lhs)
 	# print("RHS terms:", rhs)
 	# print("monomials regex LHS:")
 	monomials_left = []
