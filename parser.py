@@ -67,7 +67,7 @@ def format_polynomial(lhs, rhs):
 
 def parse_polynomial(equation):
 	if not re.fullmatch(polynomial, equation):
-		print("Invalid polynomial format.")
+		raise ValueError("Error: Invalid polynomial format.")	
 	p = re.findall(monomial, equation)
 	return p
 

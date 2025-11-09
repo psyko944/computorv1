@@ -1,6 +1,5 @@
 import unittest
 import subprocess
-import os
 import sys
 COMPUTOR_SCRIPT = "computor.py"
 
