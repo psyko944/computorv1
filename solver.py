@@ -24,7 +24,7 @@ def cal_roots(a, b, c):
       return ["Any number is a solution"]
     return [c/b]
   d = get_discriminant(a, b, c)
-  print(f"Discriminant: $\Delta = {b}^2 - 4 * {a} * {c} = {d}$")
+  print(f"Discriminant: {b}^2 - 4 * {a} * {c} = {d}")
   if d == 0:
     print(f"X = {-b} / (2 * {a})")
     print("Discriminant is zero, the unique solution is:")
@@ -32,16 +32,16 @@ def cal_roots(a, b, c):
 
   elif d > 0:
     print("Discriminant is strictly positive, the two solutions are:")
-    print(f"X_1 = -b - sqrt{{d}} / 2a")
+    print(f"X_1 = {-b} - sqrt({d}) / {2*a}")
     print(f"{utils.fmt_solution((-b-utils.get_sqrt(d))/(2 * a))}\n")
-    print(f"X_2 = -b + sqrt{{d}} / 2a")
+    print(f"X_2 = {-b} + sqrt({d}) / {2*a}")
     print(f"{utils.fmt_solution((-b+utils.get_sqrt(d))/(2 * a))}")
 
   else:
     print("Discriminant is strictly negative, the two complex solutions are:")
-    print(f"X_1 = -b - i * sqrt{{-d}}/{{2a}}")
+    print(f"X_1 = {-b} - i * sqrt({-d})/{2*a}")
     print(f"{utils.fmt_solution((-b-utils.sqrt(d))/(2 * a))}\n")
-    print(f"X_2 = -b + i * sqrt{{-d}}/{{2a}}")
+    print(f"X_2 = {-b} + i * sqrt({-d})/{2*a}")
     print(f"{utils.fmt_solution((-b+utils.sqrt(d))/(2 * a))}")
 
 
