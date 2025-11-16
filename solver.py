@@ -6,7 +6,7 @@ def print_solution(reduced, max_degree):
     if max_degree == 0:
         print("No solution.")
     elif max_degree == -1:
-        print("Any real number is a solution")
+        print("Any real number is a solution.")
     elif max_degree == 1:
         solve_first_degree(reduced)
     elif max_degree == 2:

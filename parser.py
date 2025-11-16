@@ -6,7 +6,7 @@ charset = "0123456789+-*=/^xX."
 sign = r"([+-]?)"
 number = r"(\d+(\.\d+)?)"
 exponent = r"[xX](\^\d+)?"
-monomial = rf"{sign}(?:{number}\*{exponent}|{number}|{exponent})"
+monomial = rf"{sign}(?:{number}\*?{exponent}|{number}|{exponent})"
 polynomial = rf"({monomial})+"
 
 

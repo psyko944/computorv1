@@ -12,7 +12,6 @@ if __name__ == "__main__":
 	else:
 		print(f"Usage: python {sys.argv[0]} \"<your_equation>\"")
 		sys.exit(1)
-	equation = sys.argv[1]
 	reduced, max_degree = parser.parse(equation)
 	print("Polynomial degree:", max_degree) if max_degree > 0 else ''
 	solver.print_solution(reduced, max_degree)
