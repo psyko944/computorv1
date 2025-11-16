@@ -10,8 +10,12 @@ if __name__ == "__main__":
 	elif len(sys.argv) == 1:
 		equation = input("Enter the equation : ")
 	else:
-		print(f"Usage: python {sys.argv[0]} \"<your_equation>\"")
+		print(f"Usage: python {sys.argv[0]} \"<your_equation>\"", file=sys.stderr, flush=True)
 		sys.exit(1)
-	reduced, max_degree = parser.parse(equation)
+	try:
+		reduced, max_degree = parser.parse(equation)
+	except ValueError as e:
+		print(e, file=sys.stderr, flush=True)
+		sys.exit(1)
 	print("Polynomial degree:", max_degree) if max_degree > 0 else ''
 	solver.print_solution(reduced, max_degree)
